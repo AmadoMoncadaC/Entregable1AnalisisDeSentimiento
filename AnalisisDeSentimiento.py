@@ -42,7 +42,7 @@ data = {
         'Producto defectuoso, muy mala compra',
         'No funciona como se describe, no lo recomiendo',
         'Compre este producto y fue una total decepción',
-        # Nueva reseñas
+        # Nuevas reseñas
         'Este producto superó mis expectativas, excelente calidad y muy útil',  # Positiva
         'Totalmente decepcionado, llegó roto y no sirve',  # Negativa
         'Muy buen desempeño, lo recomiendo totalmente',  # Positiva
@@ -70,7 +70,7 @@ data = {
         'Me sorprendió lo bien que funciona, perfecto para lo que buscaba',  # Positiva
         'No sirve para nada, muy deficiente',  # Negativa
         'Muy buena compra, quedé satisfecho con el producto',  # Positiva
-        'Malo, no lo compres'  # Negativa
+        'Malo, no lo compres'
     ],
     'sentiment': [
         1, 0, 1, 0, 1, 0, 1, 0, 0, 0,  # 1 = positiva, 0 = negativa
