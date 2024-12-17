@@ -1,0 +1,139 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Definir color para el código
+\usepackage{tcolorbox}
+\newtcolorbox[auto counter, number within=section]{codebox}[2][]{colframe=blue!50!black, colback=blue!10!white, coltitle=black, fonttitle=\bfseries, title=Código#2,#1}
+
+\title{Análisis de Sentimientos con Python}
+\author{Tu Nombre}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introducción}
+Este documento explica el código que realiza un análisis de sentimientos de reseñas de productos utilizando Python. Se utiliza un modelo de \textbf{regresión logística} y el enfoque de \textbf{TF-IDF} (Term Frequency-Inverse Document Frequency) para convertir las reseñas en vectores numéricos que pueden ser procesados por el modelo.
+
+\section{Importación de Librerías}
+El código comienza importando las siguientes librerías necesarias para el procesamiento de datos y el análisis de sentimientos:
+
+\begin{lstlisting}[language=Python,caption={Importación de librerías}]
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textbf{pandas}: Se utiliza para manipular los datos y almacenarlos en un DataFrame.
+    \item \textbf{train\_test\_split}: Permite dividir los datos en un conjunto de entrenamiento y uno de prueba.
+    \item \textbf{TfidfVectorizer}: Convierte el texto en vectores numéricos utilizando el método TF-IDF.
+    \item \textbf{LogisticRegression}: Modelo utilizado para clasificar las reseñas como positivas o negativas.
+    \item \textbf{accuracy\_score} y \textbf{classification\_report}: Permiten evaluar el desempeño del modelo.
+\end{itemize}
+
+\section{Creación de Datos de Entrada}
+Se define un conjunto de datos con reseñas de productos y sus sentimientos asociados. Las reseñas se etiquetan como 1 para positivas y 0 para negativas.
+
+\begin{lstlisting}[language=Python,caption={Definición de datos de entrada}]
+data = {
+    'review': [
+        'Este producto es increíble, lo recomiendo mucho',
+        'Muy mala calidad, no lo volvería a comprar',
+        'Excelente relación calidad-precio, muy satisfecho',
+        # Más reseñas...
+    ],
+    'sentiment': [
+        1, 0, 1,  # 1 = Positiva, 0 = Negativa
+        # Más etiquetas de sentimiento...
+    ]
+}
+\end{lstlisting}
+
+\section{Creación del DataFrame}
+El siguiente paso es convertir los datos de reseñas y sentimientos en un \textit{DataFrame} de pandas para facilitar su manipulación:
+
+\begin{lstlisting}[language=Python,caption={Conversión a DataFrame}]
+df = pd.DataFrame(data)
+\end{lstlisting}
+
+\section{División de Datos en Conjuntos de Entrenamiento y Prueba}
+Luego, se dividen los datos en conjuntos de entrenamiento (70\%) y prueba (30\%) usando la función \textit{train\_test\_split}.
+
+\begin{lstlisting}[language=Python,caption={División de los datos}]
+X_train, X_test, y_train, y_test = train_test_split(
+    df['review'], df['sentiment'], test_size=0.3, random_state=42)
+\end{lstlisting}
+
+\section{Definición de Stopwords}
+Las \textit{stopwords} son palabras comunes que se eliminan durante el procesamiento del texto. Se define una lista de stopwords en español:
+
+\begin{lstlisting}[language=Python,caption={Stopwords en español}]
+stopwords_espanol = [
+    'de', 'la', 'que', 'el', 'en', 'y', 'a', 'los', 'se', 'del', 'las', 'un', 'por', 'para', 'con', 'una', 'su',
+    # Más stopwords...
+]
+\end{lstlisting}
+
+\section{Vectorización de Texto con TF-IDF}
+El siguiente paso es convertir las reseñas en vectores numéricos usando el enfoque TF-IDF. Se utiliza la clase \texttt{TfidfVectorizer} para transformar las reseñas.
+
+\begin{lstlisting}[language=Python,caption={Vectorización TF-IDF}]
+tfidf = TfidfVectorizer(stop_words=stopwords_espanol, lowercase=True)
+X_train_tfidf = tfidf.fit_transform(X_train)
+X_test_tfidf = tfidf.transform(X_test)
+\end{lstlisting}
+
+Aquí también se agregan algunas stopwords adicionales específicas, como \textit{pesimo}, \textit{malo}, etc.
+
+\section{Entrenamiento del Modelo de Regresión Logística}
+El modelo de regresión logística se entrena con los datos vectorizados.
+
+\begin{lstlisting}[language=Python,caption={Entrenamiento del modelo}]
+model = LogisticRegression()
+model.fit(X_train_tfidf, y_train)
+\end{lstlisting}
+
+\section{Evaluación del Modelo}
+Después de entrenar el modelo, se hacen predicciones sobre el conjunto de prueba y se evalúa la precisión del modelo.
+
+\begin{lstlisting}[language=Python,caption={Evaluación del modelo}]
+y_pred = model.predict(X_test_tfidf)
+accuracy = accuracy_score(y_test, y_pred)
+print(f'Accuracy: {accuracy * 100:.2f}%')
+print(classification_report(y_test, y_pred))
+\end{lstlisting}
+
+\section{Predicción de Sentimiento de Nuevas Reseñas}
+Se define una función para predecir el sentimiento de nuevas reseñas que ingrese el usuario:
+
+\begin{lstlisting}[language=Python,caption={Predicción de Sentimiento}]
+def predecir_sentimiento(reseña):
+    reseña_tfidf = tfidf.transform([reseña])
+    prediccion = model.predict(reseña_tfidf)
+    if prediccion[0] == 1:
+        return "Positiva"
+    else:
+        return "Negativa"
+\end{lstlisting}
+
+\section{Interacción con el Usuario}
+Finalmente, el código permite al usuario ingresar una reseña y obtener una predicción sobre su sentimiento:
+
+\begin{lstlisting}[language=Python,caption={Interacción con el usuario}]
+reseña_usuario = input("Ingresa tu reseña de producto para analizar el sentimiento: ")
+sentimiento = predecir_sentimiento(reseña_usuario)
+print(f"La reseña es clasificada como: {sentimiento}")
+\end{lstlisting}
+
+\section{Conclusión}
+Este código entrena un modelo de regresión logística para clasificar reseñas de productos como positivas o negativas. Utiliza la vectorización TF-IDF para convertir el texto en vectores numéricos y realizar predicciones sobre nuevos datos. Además, permite la interacción con el usuario para predecir el sentimiento de nuevas reseñas de productos.
+
+\end{document}
