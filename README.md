@@ -42,11 +42,11 @@ reseña_usuario = input("Ingresa tu reseña de producto para analizar el sentimi
 sentimiento = predecir_sentimiento(reseña_usuario)
 print(f"La reseña es clasificada como: {sentimiento}")
 ```
-Salida del modelo:
+### Salida del modelo:
 El script imprimirá:
 
-La precisión del modelo en porcentaje.
-Un reporte detallado de la clasificación, que incluye precisión, recall y f1-score para ambas clases (positiva y negativa).
+- La precisión del modelo en porcentaje.
+- Un reporte detallado de la clasificación, que incluye precisión, recall y f1-score para ambas clases (positiva y negativa).
 
 ## Explicación del código
 - **Preprocesamiento del texto:**
