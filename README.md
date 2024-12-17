@@ -26,3 +26,5 @@ Puedes instalarlas con pip:
 pip install pandas scikit-learn
 
  
+
+Este código representa un archivo `README.md` que describe tu proyecto de análisis de sentimientos. Puedes copiar y pegar este bloque de código directamente en tu repositorio de GitHub para usarlo como documentación.
