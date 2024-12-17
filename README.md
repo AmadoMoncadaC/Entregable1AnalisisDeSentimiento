@@ -28,8 +28,8 @@ pip install pandas scikit-learn
 ```
 ## Uso
 ### Entrenamiento y evaluación:
-#### 1.El script carga un conjunto de reseñas de productos predefinidas y las divide en un conjunto de entrenamiento y un conjunto de prueba.
-#### 2.Se entrena un modelo de regresión logística utilizando el conjunto de entrenamiento y luego se evalúa la precisión utilizando el conjunto de prueba.
+- ** 1. El script carga un conjunto de reseñas de productos predefinidas y las divide en un conjunto de entrenamiento y un conjunto de prueba.
+- ** 2. Se entrena un modelo de regresión logística utilizando el conjunto de entrenamiento y luego se evalúa la precisión utilizando el conjunto de prueba.
 ### Predicción:
 El usuario puede ingresar una reseña de producto, y el modelo predice si el sentimiento es positivo o negativo.
 
