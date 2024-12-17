@@ -14,7 +14,7 @@ stopwords_espanol = [
     'ellas', 'ante', 'ese', 'esto', 'esa', 'esos', 'esas', 'unos', 'una', 'su', 'de', 'todo', 'mismo', 'ya'
 ]
 
-# Crear un ejemplo de datos (reseñas de productos)
+#Datos (reseñas de productos)
 data = {
     'review': [
         'Este producto es increíble, lo recomiendo mucho',
@@ -25,16 +25,16 @@ data = {
         'Horrible, no funciona como debería',
         'Perfecto para lo que necesitaba, lo volveré a comprar',
         'No vale lo que cuesta, decepcionado',
-        'Pesimo producto malo',  # Añadido un ejemplo negativo
-        'No funciona nada bien, muy malo',  # Otro ejemplo negativo
-        # Generación de más datos sintéticos (positivos)
+        'Pesimo producto malo', 
+        'No funciona nada bien, muy malo', 
+        # Generación de datos sintéticos (positivos)
         'Me encantó este producto, es fantástico',
         'Excelente calidad, superó mis expectativas',
         'Lo compraría nuevamente, es perfecto para lo que busco',
         'Es el mejor producto que he comprado, me sorprendió mucho',
         'Estoy muy feliz con la compra, totalmente recomendado',
         'Muy útil, y el precio es justo para lo que ofrece',
-        # Generación de más datos sintéticos (negativos)
+        # Generación de datos sintéticos (negativos)
         'El producto llegó roto y no funcionaba, pésima calidad',
         'Muy decepcionado, no lo recomiendo para nada',
         'El artículo no vale lo que cuesta, no es bueno',
@@ -71,13 +71,17 @@ data = {
         'Me sorprendió lo bien que funciona, perfecto para lo que buscaba',  # Positiva
         'No sirve para nada, muy deficiente',  # Negativa
         'Muy buena compra, quedé satisfecho con el producto',  # Positiva
-        'Malo, no lo compres'
+        'Malo, no lo compres',
+        'Muy buen producto',
+        'No me gusto',
+        'Muy mal producto'
     ],
     'sentiment': [
         1, 0, 1, 0, 1, 0, 1, 0, 0, 0,  # 1 = positiva, 0 = negativa
         1, 1, 1, 1, 1, 1,  # Positivas adicionales
         0, 0, 0, 0, 0, 0, 0, 0,  # Negativas adicionales
-        1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0
+        1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
+        1, 0, 0
 
     ]
 }
