@@ -24,14 +24,16 @@ data = {
         'Horrible, no funciona como debería',
         'Perfecto para lo que necesitaba, lo volveré a comprar',
         'No vale lo que cuesta, decepcionado',
-        'Pesimo producto malo',
-        'No funciona nada bien, muy malo',
+        'Pesimo producto malo',  # Añadido un ejemplo negativo
+        'No funciona nada bien, muy malo',  # Otro ejemplo negativo
+        # Generación de más datos sintéticos (positivos)
         'Me encantó este producto, es fantástico',
         'Excelente calidad, superó mis expectativas',
         'Lo compraría nuevamente, es perfecto para lo que busco',
         'Es el mejor producto que he comprado, me sorprendió mucho',
         'Estoy muy feliz con la compra, totalmente recomendado',
         'Muy útil, y el precio es justo para lo que ofrece',
+        # Generación de más datos sintéticos (negativos)
         'El producto llegó roto y no funcionaba, pésima calidad',
         'Muy decepcionado, no lo recomiendo para nada',
         'El artículo no vale lo que cuesta, no es bueno',
@@ -40,41 +42,42 @@ data = {
         'Producto defectuoso, muy mala compra',
         'No funciona como se describe, no lo recomiendo',
         'Compre este producto y fue una total decepción',
-        'Este producto superó mis expectativas, excelente calidad y muy útil',
-        'Totalmente decepcionado, llegó roto y no sirve',
-        'Muy buen desempeño, lo recomiendo totalmente',
-        'No lo compraría de nuevo, el material es muy frágil',
-        'Increíble relación calidad-precio, me encanta',
-        'Producto defectuoso, no funciona como se espera',
-        'El producto es exactamente lo que necesitaba, fantástico',
-        'Una gran decepción, no cumple lo prometido',
-        'El servicio de entrega fue rápido y el producto es excelente',
-        'No vale la pena, se rompió al poco tiempo de uso',
-        'Me sorprendió lo bien que funciona, totalmente recomendado',
-        'Malísimo, no tiene buena calidad, muy decepcionante',
-        'Es el mejor producto que he comprado, sin dudas',
-        'Muy mala experiencia, llegó tarde y mal embalado',
-        'Me encanta, superó mis expectativas en todo',
-        'Definitivamente no lo volveré a comprar, no funciona',
-        'Muy bueno, cumple con todo lo prometido',
-        'Producto de mala calidad, no lo recomiendo',
-        'Es un producto increíble, lo usaré todos los días',
-        'No es lo que esperaba, no lo recomiendo en absoluto',
-        'Es perfecto para mi casa, me encanta',
-        'Decepcionante, no funciona como se describe',
-        'Excelente, vale cada centavo que pagué',
-        'No lo recomiendo para nada, muy malo',
-        'Me sorprendió lo bien que funciona, perfecto para lo que buscaba',
-        'No sirve para nada, muy deficiente',
-        'Muy buena compra, quedé satisfecho con el producto',
-        'Malo, no lo compres'
+        # Nueva reseñas
+        'Este producto superó mis expectativas, excelente calidad y muy útil',  # Positiva
+        'Totalmente decepcionado, llegó roto y no sirve',  # Negativa
+        'Muy buen desempeño, lo recomiendo totalmente',  # Positiva
+        'No lo compraría de nuevo, el material es muy frágil',  # Negativa
+        'Increíble relación calidad-precio, me encanta',  # Positiva
+        'Producto defectuoso, no funciona como se espera',  # Negativa
+        'El producto es exactamente lo que necesitaba, fantástico',  # Positiva
+        'Una gran decepción, no cumple lo prometido',  # Negativa
+        'El servicio de entrega fue rápido y el producto es excelente',  # Positiva
+        'No vale la pena, se rompió al poco tiempo de uso',  # Negativa
+        'Me sorprendió lo bien que funciona, totalmente recomendado',  # Positiva
+        'Malísimo, no tiene buena calidad, muy decepcionante',  # Negativa
+        'Es el mejor producto que he comprado, sin dudas',  # Positiva
+        'Muy mala experiencia, llegó tarde y mal embalado',  # Negativa
+        'Me encanta, superó mis expectativas en todo',  # Positiva
+        'Definitivamente no lo volveré a comprar, no funciona',  # Negativa
+        'Muy bueno, cumple con todo lo prometido',  # Positiva
+        'Producto de mala calidad, no lo recomiendo',  # Negativa
+        'Es un producto increíble, lo usaré todos los días',  # Positiva
+        'No es lo que esperaba, no lo recomiendo en absoluto',  # Negativa
+        'Es perfecto para mi casa, me encanta',  # Positiva
+        'Decepcionante, no funciona como se describe',  # Negativa
+        'Excelente, vale cada centavo que pagué',  # Positiva
+        'No lo recomiendo para nada, muy malo',  # Negativa
+        'Me sorprendió lo bien que funciona, perfecto para lo que buscaba',  # Positiva
+        'No sirve para nada, muy deficiente',  # Negativa
+        'Muy buena compra, quedé satisfecho con el producto',  # Positiva
+        'Malo, no lo compres'  # Negativa
     ],
     'sentiment': [
         1, 0, 1, 0, 1, 0, 1, 0, 0, 0,  # 1 = positiva, 0 = negativa
         1, 1, 1, 1, 1, 1,  # Positivas adicionales
-        0, 0, 0, 0, 0, 0, 0, 0,
-        1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0
-        # Negativas adicionales
+        0, 0, 0, 0, 0, 0, 0, 0,  # Negativas adicionales
+        1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0
+
     ]
 }
 
@@ -82,16 +85,20 @@ data = {
 df = pd.DataFrame(data)
 
 # Dividir los datos en conjunto de entrenamiento y prueba
-X_train, X_test, y_train, y_test = train_test_split(df['review'], df['sentiment'], test_size=0.3, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    df['review'], df['sentiment'], test_size=0.3, random_state=42)
 
 # Agregar algunas palabras clave negativas específicas al vectorizador
-stopwords_adicionales = ['pesimo', 'malo', 'horrible', 'defectuoso', 'decepcionado']
+stopwords_adicionales = ['pesimo', 'malo',
+                         'horrible', 'defectuoso', 'decepcionado']
 
 # Crear una lista de stopwords que incluye las palabras en español y las adicionales
-stop_words_completo = stopwords_espanol + stopwords_adicionales  # Concatenar las stopwords
+stop_words_completo = stopwords_espanol + \
+    stopwords_adicionales  # Concatenar las stopwords
 
 # Aplicar TF-IDF vectorización para convertir el texto en vectores
-tfidf = TfidfVectorizer(stop_words=stop_words_completo, lowercase=True)  # Añadir las palabras clave negativas y las stopwords en español
+# Añadir las palabras clave negativas y las stopwords en español
+tfidf = TfidfVectorizer(stop_words=stop_words_completo, lowercase=True)
 X_train_tfidf = tfidf.fit_transform(X_train)
 X_test_tfidf = tfidf.transform(X_test)
 
@@ -110,21 +117,25 @@ print(f'Accuracy: {accuracy * 100:.2f}%')
 print(classification_report(y_test, y_pred))
 
 # Función para predecir el sentimiento de una nueva reseña
+
+
 def predecir_sentimiento(reseña):
     # Transformar la nueva reseña utilizando el vectorizador TF-IDF
     reseña_tfidf = tfidf.transform([reseña])
-    
+
     # Realizar la predicción con el modelo entrenado
     prediccion = model.predict(reseña_tfidf)
-    
+
     # Interpretar el resultado
     if prediccion[0] == 1:
         return "Positiva"
     else:
         return "Negativa"
 
+
 # Pedir al usuario que ingrese una reseña
-reseña_usuario = input("Ingresa tu reseña de producto para analizar el sentimiento: ")
+reseña_usuario = input(
+    "Ingresa tu reseña de producto para analizar el sentimiento: ")
 
 # Predecir el sentimiento de la reseña ingresada
 sentimiento = predecir_sentimiento(reseña_usuario)
